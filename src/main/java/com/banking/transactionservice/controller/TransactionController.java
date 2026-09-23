@@ -1,15 +1,19 @@
 package com.banking.transactionservice.controller;
 
+import com.banking.transactionservice.dto.TransactionResponse;
 import com.banking.transactionservice.dto.TransferRequest;
-import com.banking.transactionservice.entity.Transaction;
+import com.banking.transactionservice.service.TransactionService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/transactions")
 @Slf4j
 @RequiredArgsConstructor
 public class TransactionController {
@@ -24,7 +28,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{transactionId}")
-    public ResponseEntity<TransactionRespose> getTransaction(
+    public ResponseEntity<TransactionResponse> getTransaction(
             @PathVariable String transactionId){
 
         return ResponseEntity.ok(transactionService.getTransaction(transactionId));
